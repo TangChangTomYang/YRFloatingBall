@@ -14,6 +14,7 @@
 		00E636F3250F3F4700B052BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00E636F2250F3F4700B052BD /* Assets.xcassets */; };
 		00E636F6250F3F4700B052BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00E636F4250F3F4700B052BD /* LaunchScreen.storyboard */; };
 		00E636F9250F3F4700B052BD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E636F8250F3F4700B052BD /* main.m */; };
+		00E63701250F3F5800B052BD /* YRFloatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E63700250F3F5800B052BD /* YRFloatingView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		00E636F5250F3F4700B052BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		00E636F7250F3F4700B052BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E636F8250F3F4700B052BD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		00E636FF250F3F5800B052BD /* YRFloatingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YRFloatingView.h; sourceTree = "<group>"; };
+		00E63700250F3F5800B052BD /* YRFloatingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YRFloatingView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,15 +66,17 @@
 			children = (
 				00E636E6250F3F4600B052BD /* AppDelegate.h */,
 				00E636E7250F3F4600B052BD /* AppDelegate.m */,
+				00E636F2250F3F4700B052BD /* Assets.xcassets */,
+				00E636F7250F3F4700B052BD /* Info.plist */,
+				00E636F4250F3F4700B052BD /* LaunchScreen.storyboard */,
+				00E636F8250F3F4700B052BD /* main.m */,
+				00E636EF250F3F4600B052BD /* Main.storyboard */,
 				00E636E9250F3F4600B052BD /* SceneDelegate.h */,
 				00E636EA250F3F4600B052BD /* SceneDelegate.m */,
 				00E636EC250F3F4600B052BD /* ViewController.h */,
 				00E636ED250F3F4600B052BD /* ViewController.m */,
-				00E636EF250F3F4600B052BD /* Main.storyboard */,
-				00E636F2250F3F4700B052BD /* Assets.xcassets */,
-				00E636F4250F3F4700B052BD /* LaunchScreen.storyboard */,
-				00E636F7250F3F4700B052BD /* Info.plist */,
-				00E636F8250F3F4700B052BD /* main.m */,
+				00E636FF250F3F5800B052BD /* YRFloatingView.h */,
+				00E63700250F3F5800B052BD /* YRFloatingView.m */,
 			);
 			path = YRFloatingView;
 			sourceTree = "<group>";
@@ -148,6 +153,7 @@
 			files = (
 				00E636EE250F3F4600B052BD /* ViewController.m in Sources */,
 				00E636E8250F3F4600B052BD /* AppDelegate.m in Sources */,
+				00E63701250F3F5800B052BD /* YRFloatingView.m in Sources */,
 				00E636F9250F3F4700B052BD /* main.m in Sources */,
 				00E636EB250F3F4600B052BD /* SceneDelegate.m in Sources */,
 			);

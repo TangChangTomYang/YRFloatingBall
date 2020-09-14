@@ -7,8 +7,14 @@
 //
 
 #import "ViewController.h"
+#import "YRFloatingView.h"
+
+
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet YRFloatingView *container;
+
+@property (weak, nonatomic) IBOutlet UIView *orangeView;
 
 @end
 
@@ -16,8 +22,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+}
+- (IBAction)btnClick:(id)sender {
+    
+    [YRFloatingView showAtView:self.container];
 }
 
 
 @end
+
+
