@@ -8,18 +8,37 @@
 
 #import "YRFloatingView.h"
 
-@interface UIView (RectCorner)
+@interface UIView (RectRoundCorner)
   
 @end
   
-@implementation UIView (RectCorner)
+@implementation UIView (RectRoundCorner)
+
+-(CGFloat)selfHeight{
+    return self.frame.size.height;
+}
+
+-(CGFloat)selfWidth{
+    return self.frame.size.width;
+}
+
+-(CGFloat)rectRoundRadius{
+    CGFloat radius = ([self selfHeight] > [self selfWidth] ?  [self selfWidth] : [self selfHeight]) * 0.5;
+    return radius;
+}
+
+-(CGSize)rectRoundSize{
+    return CGSizeMake([self rectRoundRadius], [self rectRoundRadius]);
+}
+
+
 
 - (void)setCornerOnTop {
     
     UIBezierPath *maskPath;
     maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
                                      byRoundingCorners:(UIRectCornerTopLeft | UIRectCornerTopRight)
-                                           cornerRadii:CGSizeMake(30.0f, 30.0f)];
+                                           cornerRadii:[self rectRoundSize]];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
     maskLayer.frame = self.bounds;
     maskLayer.path = maskPath.CGPath;
@@ -30,7 +49,7 @@
     UIBezierPath *maskPath;
     maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
                                      byRoundingCorners:(UIRectCornerTopRight | UIRectCornerBottomRight)
-                                           cornerRadii:CGSizeMake(self.frame.size.height * 0.5, self.frame.size.height * 0.5)];
+                                           cornerRadii:[self rectRoundSize]];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
     maskLayer.frame = self.bounds;
     maskLayer.path = maskPath.CGPath;
@@ -41,7 +60,7 @@
     UIBezierPath *maskPath;
     maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
                                      byRoundingCorners:(UIRectCornerTopLeft | UIRectCornerBottomLeft)
-                                           cornerRadii:CGSizeMake(self.frame.size.height * 0.5, self.frame.size.height * 0.5)];
+                                           cornerRadii:[self rectRoundSize]];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
     maskLayer.frame = self.bounds;
     maskLayer.path = maskPath.CGPath;
@@ -53,7 +72,7 @@
     UIBezierPath *maskPath;
     maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
                                      byRoundingCorners:(UIRectCornerBottomLeft | UIRectCornerBottomRight)
-                                           cornerRadii:CGSizeMake(30.0f, 30.0f)];
+                                           cornerRadii:[self rectRoundSize]];
     
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
     maskLayer.frame = self.bounds;
@@ -63,7 +82,7 @@
 - (void)setAllCorner {
     UIBezierPath *maskPath;
     maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
-                                          cornerRadius:self.frame.size.height * 0.5];
+                                          cornerRadius:[self rectRoundRadius]];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
     maskLayer.frame = self.bounds;
     maskLayer.path = maskPath.CGPath;
@@ -85,24 +104,37 @@
 @property (nonatomic, assign) CGRect  bFrame;
 @end
 
-#define fixSpace 160.f
+ 
 @implementation YRFloatingView
 
  
 static YRFloatingView *_floatingBall;
 + (void)showAtView:(UIView *)view {
-    
-    
+    CGRect rect = CGRectMake(0.f, 200.f, 124.f, 64.f);
     if (!_floatingBall) {
-        _floatingBall = [[YRFloatingView alloc] initWithFrame:CGRectMake(0.f, 200.f, 60.f, 60.f)];
+        _floatingBall = [[YRFloatingView alloc] initWithFrame:rect];
     }
     
     
      
     if (!_floatingBall.superview) {
-        _floatingBall.frame = CGRectMake(0.f, 200.f, 60.f, 60.f);
+        _floatingBall.frame = rect;
         [view addSubview:_floatingBall];
         [view bringSubviewToFront:_floatingBall];
+        
+        CGFloat floatX = _floatingBall.frame.origin.x;
+        CGFloat floatW = _floatingBall.frame.size.width;
+        CGFloat viewW = view.frame.size.width;
+        
+        if (floatX <= 0) {
+            [_floatingBall setCornerOnRight];
+        }
+        else if(floatX + floatW >= viewW){
+            [_floatingBall setCornerOnLeft];
+        }
+        else{
+            [_floatingBall setAllCorner];
+        }
     }
 }
 
@@ -110,12 +142,11 @@ static YRFloatingView *_floatingBall;
 - (instancetype)initWithFrame:(CGRect)frame {
     
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor orangeColor];
-        ///设置图片
-        self.layer.contents = (__bridge id)[UIImage imageNamed:@"WebView_Minimize_Float_IconHL"].CGImage;
+        self.layer.contents = (__bridge id)[UIImage imageNamed:@"Btn"].CGImage;
         self.contentMode = UIViewContentModeScaleAspectFit;
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureAction:)];
         [self addGestureRecognizer:pan];
+       
         
     }
     return self;
